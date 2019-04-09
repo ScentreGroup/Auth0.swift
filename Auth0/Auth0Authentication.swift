@@ -31,7 +31,7 @@ struct Auth0Authentication: Authentication {
 
     let session: URLSession
 
-    init(clientId: String, url: URL, session: URLSession = URLSession.shared, telemetry: Telemetry = Telemetry()) {
+    init(clientId: String, url: URL, session: URLSession, telemetry: Telemetry = Telemetry()) {
         self.clientId = clientId
         self.url = url
         self.session = session
@@ -247,7 +247,7 @@ struct Auth0Authentication: Authentication {
 
     #if os(iOS)
     func webAuth(withConnection connection: String) -> WebAuth {
-        let safari = SafariWebAuth(clientId: self.clientId, url: self.url, presenter: ControllerModalPresenter(), telemetry: self.telemetry)
+        let safari = SafariWebAuth(clientId: self.clientId, url: self.url, session: self.session, presenter: ControllerModalPresenter(), telemetry: self.telemetry)
         return safari
             .logging(enabled: self.logger != nil)
             .connection(connection)

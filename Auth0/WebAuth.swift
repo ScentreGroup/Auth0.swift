@@ -58,9 +58,9 @@ public typealias A0URLOptionsKey = UIApplicationOpenURLOptionsKey
  - returns: Auth0 WebAuth component
  - important: Calling this method without a valid `Auth0.plist` will crash your application
  */
-public func webAuth(bundle: Bundle = Bundle.main) -> WebAuth {
+public func webAuth(session: URLSession, bundle: Bundle = Bundle.main) -> WebAuth {
     let values = plistValues(bundle: bundle)!
-    return webAuth(clientId: values.clientId, domain: values.domain)
+    return webAuth(clientId: values.clientId, domain: values.domain, session: session)
 }
 
 /**
@@ -75,8 +75,8 @@ public func webAuth(bundle: Bundle = Bundle.main) -> WebAuth {
 
  - returns: Auth0 WebAuth component
  */
-public func webAuth(clientId: String, domain: String) -> WebAuth {
-    return SafariWebAuth(clientId: clientId, url: .a0_url(domain))
+public func webAuth(clientId: String, domain: String, session: URLSession = .shared) -> WebAuth {
+    return SafariWebAuth(clientId: clientId, url: .a0_url(domain), session: session)
 }
 
 /**

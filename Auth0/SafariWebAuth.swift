@@ -32,6 +32,7 @@ class SafariWebAuth: WebAuth {
 
     let clientId: String
     let url: URL
+    let session: URLSession
     var telemetry: Telemetry
 
     let presenter: ControllerModalPresenter
@@ -44,13 +45,14 @@ class SafariWebAuth: WebAuth {
     private var authenticationSession = true
     private var safariPresentationStyle = UIModalPresentationStyle.fullScreen
 
-    convenience init(clientId: String, url: URL, presenter: ControllerModalPresenter = ControllerModalPresenter(), telemetry: Telemetry = Telemetry()) {
-        self.init(clientId: clientId, url: url, presenter: presenter, storage: TransactionStore.shared, telemetry: telemetry)
+    convenience init(clientId: String, url: URL, session: URLSession, presenter: ControllerModalPresenter = ControllerModalPresenter(), telemetry: Telemetry = Telemetry()) {
+        self.init(clientId: clientId, url: url, session: session, presenter: presenter, storage: TransactionStore.shared, telemetry: telemetry)
     }
 
-    init(clientId: String, url: URL, presenter: ControllerModalPresenter, storage: TransactionStore, telemetry: Telemetry) {
+    init(clientId: String, url: URL, session: URLSession, presenter: ControllerModalPresenter, storage: TransactionStore, telemetry: Telemetry) {
         self.clientId = clientId
         self.url = url
+        self.session = session
         self.presenter = presenter
         self.storage = storage
         self.telemetry = telemetry
@@ -197,7 +199,7 @@ class SafariWebAuth: WebAuth {
 
     func handler(_ redirectURL: URL) -> OAuth2Grant {
         if self.responseType.contains([.code]) {
-            var authentication = Auth0Authentication(clientId: self.clientId, url: self.url, telemetry: self.telemetry)
+            var authentication = Auth0Authentication(clientId: self.clientId, url: self.url, session: self.session, telemetry: self.telemetry)
             authentication.logger = self.logger
             return PKCE(authentication: authentication, redirectURL: redirectURL, reponseType: self.responseType, nonce: self.nonce)
         } else {
