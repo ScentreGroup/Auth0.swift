@@ -88,6 +88,11 @@ public func resumeAuth(_ url: URL, options: [A0URLOptionsKey: Any]) -> Bool {
     return TransactionStore.shared.resume(url, options: options)
 }
 
+public struct WebAuthPresentationDetails {
+    public var authorizeURL: URL
+    public var callbackURL: URL
+}
+
 /// WebAuth Authentication using Auth0
 public protocol WebAuth: Trackable, Loggable {
     var clientId: String { get }
@@ -216,6 +221,8 @@ public protocol WebAuth: Trackable, Loggable {
      - parameter callback: callback called with the result of the WebAuth flow
      */
     func start(_ callback: @escaping (Result<Credentials>) -> Void)
+
+    func startForCustomPresentation(_ callback: @escaping (Result<Credentials>) -> Void) -> WebAuthPresentationDetails?
 
     /**
      Removes Auth0 session and optionally remove the Identity Provider session.
