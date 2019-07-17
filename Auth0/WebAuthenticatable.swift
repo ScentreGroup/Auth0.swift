@@ -68,6 +68,14 @@ public func webAuth(clientId: String, domain: String) -> WebAuth {
     return Auth0WebAuth(clientId: clientId, url: .a0_url(domain))
 }
 
+/// Details for custom presentation of a WebAuth flow
+public struct WebAuthPresentationDetails {
+    /// The URL for loading the authorize form
+    public var authorizeURL: URL
+    /// The callback URL to expect at the completion of the WebAuth flow
+    public var callbackURL: URL
+}
+
 /// WebAuth Authentication using Auth0
 public protocol WebAuthenticatable: Trackable, Loggable {
     var clientId: String { get }
@@ -223,6 +231,10 @@ public protocol WebAuthenticatable: Trackable, Loggable {
      - parameter callback: callback called with the result of the WebAuth flow
      */
     func start(_ callback: @escaping (Result<Credentials>) -> Void)
+
+    /// Starts the WebAuth flow and returns enough information to display the flow in a custom manner
+    /// - Parameter callback: callback called with the result of the WebAuth flow
+    func startForCustomPresentation(_ callback: @escaping (Result<Credentials>) -> Void) -> WebAuthPresentationDetails?
 
     /**
      Removes Auth0 session and optionally remove the Identity Provider session.
