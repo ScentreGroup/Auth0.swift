@@ -88,6 +88,12 @@ public func resumeAuth(_ url: URL, options: [A0URLOptionsKey: Any]) -> Bool {
     return TransactionStore.shared.resume(url, options: options)
 }
 
+public enum WebAuthStateParameter {
+    case none
+    case state(String)
+    case generated
+}
+
 public struct WebAuthPresentationDetails {
     public var authorizeURL: URL
     public var callbackURL: URL
@@ -147,7 +153,7 @@ public protocol WebAuth: Trackable, Loggable {
 
      - returns: the same WebAuth instance to allow method chaining
      */
-    func state(_ state: String) -> Self
+    func state(_ state: WebAuthStateParameter) -> Self
 
     /**
      Send additional parameters for authentication.
@@ -264,5 +270,9 @@ public extension WebAuth {
     @available(iOS 11, *)
     func useLegacyAuthentication() -> Self {
         return useLegacyAuthentication(withStyle: .fullScreen)
+    }
+
+    func state(_ state: String) -> Self {
+        return self.state(.state(state))
     }
 }
