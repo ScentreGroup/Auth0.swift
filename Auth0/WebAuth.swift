@@ -105,6 +105,8 @@ public protocol WebAuth: Trackable, Loggable {
     var url: URL { get }
     var telemetry: Telemetry { get set }
 
+    func authorizeURL(_ url: URL) -> Self
+
     /**
      For redirect url instead of a custom scheme it will use `https` and iOS 9 Universal Links.
 
