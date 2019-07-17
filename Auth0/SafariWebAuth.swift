@@ -37,6 +37,7 @@ class SafariWebAuth: WebAuth {
     var parameters: [String: String] = [:]
     var universalLink = false
     var responseType: [ResponseType] = [.code]
+    var state: WebAuthStateParameter = .generated
     var nonce: String?
     private var authenticationSession = true
     private var safariPresentationStyle = UIModalPresentationStyle.fullScreen
@@ -73,8 +74,8 @@ class SafariWebAuth: WebAuth {
         return self
     }
 
-    func state(_ state: String) -> Self {
-        self.parameters["state"] = state
+    func state(_ state: WebAuthStateParameter) -> Self {
+        self.state = state
         return self
     }
 
@@ -118,7 +119,7 @@ class SafariWebAuth: WebAuth {
             guard self.nonce != nil else { return callback(Result.failure(error: WebAuthError.noNonceProvided)) }
         }
         let handler = self.handler(redirectURL)
-        let state = self.parameters["state"] ?? generateDefaultState()
+        let state = self.state.value
         let authorizeURL = self.buildAuthorizeURL(withRedirectURL: redirectURL, defaults: handler.defaults, state: state)
 
         #if swift(>=3.2)
@@ -235,14 +236,27 @@ class SafariWebAuth: WebAuth {
     }
 }
 
-private func generateDefaultState() -> String? {
-    var data = Data(count: 32)
-    var tempData = data
-
-    let result = tempData.withUnsafeMutableBytes {
-        SecRandomCopyBytes(kSecRandomDefault, data.count, $0.baseAddress!)
+private extension WebAuthStateParameter {
+    var value: String? {
+        switch self {
+        case .none:
+            return nil
+        case .state(let state):
+            return state
+        case .generated:
+            return generateDefaultState()
+        }
     }
 
-    guard result == 0 else { return nil }
-    return tempData.a0_encodeBase64URLSafe()
+    func generateDefaultState() -> String? {
+        let data = Data(count: 32)
+        var tempData = data
+
+        let result = tempData.withUnsafeMutableBytes {
+            SecRandomCopyBytes(kSecRandomDefault, data.count, $0.baseAddress!)
+        }
+
+        guard result == 0 else { return nil }
+        return tempData.a0_encodeBase64URLSafe()
+    }
 }
