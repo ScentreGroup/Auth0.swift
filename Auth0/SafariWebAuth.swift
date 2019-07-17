@@ -109,6 +109,29 @@ class SafariWebAuth: WebAuth {
         return self
     }
 
+    func startForCustomPresentation(_ callback: @escaping (Result<Credentials>) -> Void) -> WebAuthPresentationDetails? {
+        guard
+            let redirectURL = self.redirectURL, !redirectURL.absoluteString.hasPrefix(SafariWebAuth.NoBundleIdentifier)
+            else {
+                callback(Result.failure(error: WebAuthError.noBundleIdentifierFound))
+                return nil
+        }
+        if self.responseType.contains(.idToken) {
+            guard self.nonce != nil else {
+                callback(Result.failure(error: WebAuthError.noNonceProvided))
+                return nil
+            }
+        }
+        let handler = self.handler(redirectURL)
+        let state = self.state.value
+        let authorizeURL = self.buildAuthorizeURL(withRedirectURL: redirectURL, defaults: handler.defaults, state: state)
+
+        let session = AuthSession(redirectURL: redirectURL, state: state, handler: handler, finish: callback, logger: self.logger)
+        logger?.trace(url: authorizeURL, source: "Safari")
+        self.storage.store(session)
+        return WebAuthPresentationDetails(authorizeURL: authorizeURL, callbackURL: redirectURL)
+    }
+
     func start(_ callback: @escaping (Result<Credentials>) -> Void) {
         guard
             let redirectURL = self.redirectURL, !redirectURL.absoluteString.hasPrefix(SafariWebAuth.NoBundleIdentifier)
