@@ -29,6 +29,7 @@ class SafariWebAuth: WebAuth {
 
     let clientId: String
     let url: URL
+    var authorizeURL: URL?
     var telemetry: Telemetry
 
     let presenter: ControllerModalPresenter
@@ -52,6 +53,11 @@ class SafariWebAuth: WebAuth {
         self.presenter = presenter
         self.storage = storage
         self.telemetry = telemetry
+    }
+
+    func authorizeURL(_ url: URL) -> Self {
+        self.authorizeURL = url
+        return self
     }
 
     func useUniversalLink() -> Self {
@@ -192,7 +198,7 @@ class SafariWebAuth: WebAuth {
     }
 
     func buildAuthorizeURL(withRedirectURL redirectURL: URL, defaults: [String: String], state: String?) -> URL {
-        let authorize = URL(string: "/authorize", relativeTo: self.url)!
+        let authorize = self.authorizeURL ?? URL(string: "/authorize", relativeTo: self.url)!
         var components = URLComponents(url: authorize, resolvingAgainstBaseURL: true)!
         var items: [URLQueryItem] = []
         var entries = defaults

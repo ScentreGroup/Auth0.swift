@@ -112,6 +112,12 @@ public protocol WebAuth: Trackable, Loggable {
     var url: URL { get }
     var telemetry: Telemetry { get set }
 
+    /// Override the base URL used when loading a web login form
+    ///
+    /// - Parameter url: the base URL to use for the `/authorize` endpoint
+    /// - Returns: the same WebAuth instance to allow method chaining
+    func authorizeURL(_ url: URL) -> Self
+
     /**
      For redirect url instead of a custom scheme it will use `https` and iOS 9 Universal Links.
 
