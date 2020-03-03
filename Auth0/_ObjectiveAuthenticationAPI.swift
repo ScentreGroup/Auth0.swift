@@ -40,6 +40,7 @@ public class _ObjectiveAuthenticationAPI: NSObject {
         self.authentication = Auth0Authentication(clientId: clientId, url: url, session: session)
     }
 
+    @available(*, deprecated, message: "see -[A0AuthenticationAPI loginWithUsernameOrEmail:password:realm:audience:scope:parameters:callback:]")
     @objc(loginWithUsernameOrEmail:password:connection:scope:parameters:callback:)
     // swiftlint:disable:next function_parameter_count
     public func login(withUsernameOrEmail username: String, password: String, connection: String, scope: String, parameters: [String: Any]?, callback: @escaping (NSError?, Credentials?) -> Void) {
