@@ -100,6 +100,7 @@ public class _ObjectiveAuthenticationAPI: NSObject {
             .start(handleResult(callback: callback))
     }
 
+    @available(*, deprecated, message: "use -[A0AuthenticationAPI createUserWithEmail:username:password:connection:userMetadata:] and then -[A0AuthenticationAPI loginWithUsernameOrEmail:password:realm:audience:scope:parameters:callback:]")
     @objc(signUpWithEmail:username:password:connection:userMetadata:scope:parameters:callback:)
     // swiftlint:disable:next function_parameter_count
     public func signUp(withEmail email: String, username: String?, password: String, connection: String, userMetadata: [String: Any]?, scope: String, parameters: [String: Any]?, callback: @escaping (NSError?, Credentials?) -> Void) {

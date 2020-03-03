@@ -175,6 +175,7 @@ struct Auth0Authentication: Authentication {
     }
 
     // swiftlint:disable:next function_parameter_count
+    @available(*, deprecated, message: "use createUser(email:, username:, password:, connection:, userMetadata:) and then login(usernameOrEmail username:, password:, realm:, audience:, scope:)")
     func signUp(email: String, username: String? = nil, password: String, connection: String, userMetadata: [String: Any]?, scope: String, parameters: [String: Any]) -> ConcatRequest<DatabaseUser, Credentials, AuthenticationError> {
         let first = createUser(email: email, username: username, password: password, connection: connection, userMetadata: userMetadata)
         let second = login(usernameOrEmail: email, password: password, connection: connection, scope: scope, parameters: parameters)

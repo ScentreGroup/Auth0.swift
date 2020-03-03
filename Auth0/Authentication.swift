@@ -347,9 +347,9 @@ public protocol Authentication: Trackable, Loggable {
 
      ```
      Auth0
-     .authentication(clientId: clientId, domain: "samples.auth0.com")
-     .signUp(email: "support@auth0.com", username: "support", password: "a secret password", connection: "Username-Password-Authentication")
-     .start { print($0) }
+        .authentication(clientId: clientId, domain: "samples.auth0.com")
+        .signUp(email: "support@auth0.com", username: "support", password: "a secret password", connection: "Username-Password-Authentication")
+        .start { print($0) }
      ```
 
      or specifying the scope and parameters used for authentication
@@ -999,6 +999,7 @@ public extension Authentication {
      - returns: an authentication request that will yield Auth0 user credentials after creating the user.
      - requires: Legacy Grant `http://auth0.com/oauth/legacy/grant-type/ro`. Check [our documentation](https://auth0.com/docs/clients/client-grant-types) for more info and how to enable it.
      */
+    @available(*, deprecated, message: "use createUser(email:, username:, password:, connection:, userMetadata:) and then login(usernameOrEmail username:, password:, realm:, audience:, scope:)")
     func signUp(email: String, username: String? = nil, password: String, connection: String, userMetadata: [String: Any]? = nil, scope: String = "openid", parameters: [String: Any] = [:]) -> ConcatRequest<DatabaseUser, Credentials, AuthenticationError> {
         return self.signUp(email: email, username: username, password: password, connection: connection, userMetadata: userMetadata, scope: scope, parameters: parameters)
     }
