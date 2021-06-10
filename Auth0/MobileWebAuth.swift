@@ -28,11 +28,6 @@ import AuthenticationServices
 #endif
 
 typealias Auth0WebAuth = MobileWebAuth
-#if swift(>=4.2)
-public typealias A0URLOptionsKey = UIApplication.OpenURLOptionsKey
-#else
-public typealias A0URLOptionsKey = UIApplicationOpenURLOptionsKey
-#endif
 
 /**
  Resumes the current Auth session (if any).

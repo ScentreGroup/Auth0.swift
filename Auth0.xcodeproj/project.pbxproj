@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		28E09FC62671ADDD00165C06 /* A0URLOptionsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E09FC52671ADDD00165C06 /* A0URLOptionsKey.swift */; };
+		28E09FC72671ADDD00165C06 /* A0URLOptionsKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 28E09FC52671ADDD00165C06 /* A0URLOptionsKey.swift */; };
 		5B0893E620F8A52100FBF962 /* CredentialsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5BEDE1891EC21B040007300D /* CredentialsManager.swift */; };
 		5B0893E720F8A52400FBF962 /* CredentialsManagerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B5E93F81EC45C22002A37F9 /* CredentialsManagerError.swift */; };
 		5B16D88E1F7141A0009476A5 /* AuthenticationServicesSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B16D88C1F7141A0009476A5 /* AuthenticationServicesSession.swift */; };
@@ -486,6 +488,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		28E09FC52671ADDD00165C06 /* A0URLOptionsKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = A0URLOptionsKey.swift; sourceTree = "<group>"; };
 		5B16D88C1F7141A0009476A5 /* AuthenticationServicesSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AuthenticationServicesSession.swift; path = Auth0/AuthenticationServicesSession.swift; sourceTree = SOURCE_ROOT; };
 		5B16D88D1F7141A0009476A5 /* SafariSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SafariSession.swift; path = Auth0/SafariSession.swift; sourceTree = SOURCE_ROOT; };
 		5B16D8921F714324009476A5 /* AuthSession.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AuthSession.swift; sourceTree = "<group>"; };
@@ -1003,6 +1006,7 @@
 			children = (
 				5FCAB1771D0901BA00331C84 /* ObjectiveC */,
 				5C41F6AF244DCC1100252548 /* Platforms */,
+				28E09FC52671ADDD00165C06 /* A0URLOptionsKey.swift */,
 				5B6269E91E3F9E5200305093 /* AuthProvider.swift */,
 				5C41F6AC244DCB6D00252548 /* AuthCancelable.swift */,
 				5F53F5CD1CFD157300476A46 /* AuthTransaction.swift */,
@@ -1854,6 +1858,7 @@
 				5FDE876D1D8A424700EA27DC /* Handlers.swift in Sources */,
 				5FF2866F1D8A417B00314B72 /* _ObjectiveWebAuth.swift in Sources */,
 				5FE2F8BB1CD0EAAD003628F4 /* Response.swift in Sources */,
+				28E09FC62671ADDD00165C06 /* A0URLOptionsKey.swift in Sources */,
 				970BC36B25C27095007A7745 /* Challenge.swift in Sources */,
 				5FCCC31C1CF51DF300901E2E /* _ObjectiveManagementAPI.swift in Sources */,
 				5FDE87591D8A424700EA27DC /* Authentication.swift in Sources */,
@@ -1982,6 +1987,7 @@
 				5F7504F61D8C3F2900E3BA1C /* NSError+Helper.swift in Sources */,
 				970BC36C25C27095007A7745 /* Challenge.swift in Sources */,
 				5C41F6DD244F982700252548 /* DesktopWebAuth.swift in Sources */,
+				28E09FC72671ADDD00165C06 /* A0URLOptionsKey.swift in Sources */,
 				5FCAB17A1D09124D00331C84 /* NSURL+Auth0.swift in Sources */,
 				5FDE87521D8A424700EA27DC /* _ObjectiveAuthenticationAPI.swift in Sources */,
 				5FDE87561D8A424700EA27DC /* Auth0Authentication.swift in Sources */,
