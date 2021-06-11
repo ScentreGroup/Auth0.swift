@@ -34,7 +34,7 @@ struct Auth0Authentication: Authentication {
 
     let session: URLSession
 
-    init(clientId: String, url: URL, session: URLSession = URLSession.shared, telemetry: Telemetry = Telemetry()) {
+    init(clientId: String, url: URL, session: URLSession, telemetry: Telemetry = Telemetry()) {
         self.clientId = clientId
         self.url = url
         self.session = session
